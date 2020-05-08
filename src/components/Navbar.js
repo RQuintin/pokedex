@@ -12,10 +12,10 @@ const Navbar = () => {
         <h3> POKEDEX</h3>
         <ul>
           <li>
-            <Link to="/"> home </Link>
+            <Link to="/"> landing </Link>
           </li>
           <li>
-            <Link to="/user"> user </Link>
+            <Link to="/home"> home </Link>
           </li>
           <li>
             <Link to="/explore"> explore </Link>

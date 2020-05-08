@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import React from "react"
 import Navbar from "./components/Navbar"
+import Landing from "./features/landing/Landing"
 import Home from "./features/home/Home"
-import User from "./features/user/User"
 import Explore from "./features/explore/Explore"
 
 const App = () => {
@@ -17,9 +17,9 @@ const App = () => {
       <div tw="flex flex-col bg-green-100 min-h-screen">
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/user" component={User} />
-          <Route exact path="/explore" component={Explore} />
+          <Route exact path="/" component={Landing} />
+          <Route path="/home" component={Home} />
+          <Route path="/explore" component={Explore} />
         </Switch>
       </div>
     </Router>
