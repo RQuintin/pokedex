@@ -19,27 +19,27 @@ const Collection = () => {
   }
 
   return (
-    <section tw="flex flex-1 flex-col h-screen py-2 px-2 bg-red-500">
-      <div>
+    <div tw="p-2">
+      <section>
         <h3 tw="text-lg"> Your Collection </h3>
-        <form tw="px-8" onSubmit={handleCollectionCreation}>
+        <form onSubmit={handleCollectionCreation}>
           <input
             value={collectionName}
             onChange={e => setCollectionName(e.target.value)}
           />
-          <button tw="bg-purple-500 rounded p-2 my-1" type="submit">
+          <button tw="bg-purple-500 rounded p-1 m-1" type="submit">
             add collection
           </button>
         </form>
-      </div>
-      <div tw="">
+      </section>
+      <section>
         {collection.map(col => (
           <p tw="bg-gray-300 p-8 rounded my-2" key={col.id}>
             {col.collectionName}
           </p>
         ))}
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }
 
