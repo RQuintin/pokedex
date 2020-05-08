@@ -22,20 +22,21 @@ const Collection = () => {
     <section tw="flex flex-1 flex-col h-screen py-2 px-2 bg-red-500">
       <div>
         <h3 tw="text-lg"> Your Collection </h3>
-        <form onSubmit={handleCollectionCreation}>
-          Add collection
+        <form tw="px-8" onSubmit={handleCollectionCreation}>
           <input
             value={collectionName}
             onChange={e => setCollectionName(e.target.value)}
           />
-          <button tw="bg-purple-500 rounded p-2" type="submit">
+          <button tw="bg-purple-500 rounded p-2 my-1" type="submit">
             add collection
           </button>
         </form>
       </div>
-      <div tw="bg-pink-500">
+      <div tw="">
         {collection.map(col => (
-          <p key={col.id}> {col.collectionName} </p>
+          <p tw="bg-gray-300 p-8 rounded my-2" key={col.id}>
+            {col.collectionName}
+          </p>
         ))}
       </div>
     </section>
