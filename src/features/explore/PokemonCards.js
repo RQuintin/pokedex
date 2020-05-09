@@ -1,52 +1,32 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"
+import PokemonCard from "./PokemonCard"
 
-import axios from "axios"
-import React, { useState, useEffect } from "react"
+import { useEffect } from "react"
 
-const URL = "https://pokeapi.co/api/v2/pokemon?limit=150"
-
-const PokeCard = () => {
-  return (
-    <div tw="flex flex-row justify-around items-center bg-red-500 p-2">
-      <div tw="">
-        <img
-          tw="bg-cover"
-          alt="pokemon"
-          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-        />
-      </div>
-      <div tw="">
-        <p>name</p>
-        <p>type</p>
-        <p>stats</p>
-      </div>
-      <div tw="">
-        <p> Button to add to list</p>
-      </div>
-    </div>
-  )
-}
+import { useDispatch, useSelector } from "react-redux"
+import { fetchData, selectorPokemon } from "./pokemonCardsSlice"
 
 const PokemonCards = () => {
-  const [pokeData, setPokeData] = useState([])
+  const dispatch = useDispatch()
+  const pokemonList = useSelector(selectorPokemon)
 
   useEffect(() => {
-    const fetchPokemon = async () => {
-      const result = await axios.get(URL)
-      console.log(result.data)
-      setPokeData(result.data)
-    }
-    fetchPokemon()
-  }, [])
+    dispatch(fetchData())
+  }, [dispatch])
 
   return (
     <div tw="p-2">
       Pokemon Cards
       <section tw="grid grid-cols-1 gap-2">
-        <PokeCard />
-        <PokeCard />
+        <ul>
+          {pokemonList.map(poke => (
+            <li key={poke.name}>
+              <PokemonCard pokemonName={poke.name} />
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   )
