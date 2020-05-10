@@ -6,14 +6,14 @@ import PokemonCard from "./PokemonCard"
 import { useEffect } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { fetchData, selectorPokemon } from "./pokemonCardsSlice"
+import { fetchPokemonNameUrl, selectorPokemon } from "./pokemonCardsSlice"
 
 const PokemonCards = () => {
   const dispatch = useDispatch()
   const pokemonList = useSelector(selectorPokemon)
 
   useEffect(() => {
-    dispatch(fetchData())
+    dispatch(fetchPokemonNameUrl())
   }, [dispatch])
 
   return (
@@ -21,11 +21,11 @@ const PokemonCards = () => {
       Pokemon Cards
       <section tw="grid grid-cols-1 gap-2">
         <ul>
-          {pokemonList.map(poke => (
+          {/* {pokemonList.map(poke => (
             <li key={poke.name}>
               <PokemonCard pokemonName={poke.name} />
             </li>
-          ))}
+          ))} */}
         </ul>
       </section>
     </div>

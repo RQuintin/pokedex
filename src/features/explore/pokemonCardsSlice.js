@@ -12,19 +12,34 @@ export const pokemonCardsSlice = createSlice({
   initialState: initialState,
   reducers: {
     getData: (state, action) => {
-      state.pokemonList = action.payload
+      // const { name, baseExperience, height, weight, type } = action.payload
+      state.pokemonList.push(action.payload)
     },
   },
 })
 
 export const { getData } = pokemonCardsSlice.actions
 
-export const fetchData = () => {
+export const fetchPokemonNameUrl = () => {
   return async dispatch => {
     try {
       const response = await axios.get(URL)
       const data = response.data.results
-      dispatch(getData(data))
+
+      data.map(async poke => {
+        const responseDetails = await axios.get(poke.url)
+
+        let tempDetails = {
+          name: responseDetails.data.species.name,
+          baseExperience: responseDetails.data.base_experience,
+          height: responseDetails.data.height,
+          weight: responseDetails.data.weight,
+          type: responseDetails.data.types[0].type.name,
+          sprites: responseDetails.data.sprites.front_default,
+        }
+
+        dispatch(getData(tempDetails))
+      })
     } catch (e) {
       console.log("Could not fetch data.")
     }

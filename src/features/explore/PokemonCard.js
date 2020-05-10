@@ -6,7 +6,7 @@ const PokemonCard = props => {
   const { pokemonName } = props
 
   return (
-    <div tw="flex flex-row justify-around items-center bg-red-500 p-2">
+    <div tw="flex flex-row justify-around items-center bg-red-500 p-2 my-2 rounded">
       <div tw="">
         <img
           tw="bg-cover"
