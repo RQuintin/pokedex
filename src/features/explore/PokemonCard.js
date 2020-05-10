@@ -25,7 +25,20 @@ const PokemonCard = props => {
         <p>{pokemonBaseExperience}</p>
       </div>
       <div tw="mx-1">
-        <button tw="bg-gray-300 p-1 rounded">Add to collection</button>
+        <form>
+          <label>
+            Add Pokemon to collection <br />
+            <select>
+              <option value="grapefruit">Grapefruit</option>
+              <option value="lime">Lime</option>
+              <option value="coconut">Coconut</option>
+              <option value="mango">Mango</option>
+            </select>
+          </label>
+          <button type="submit" tw="bg-gray-300 p-1 rounded">
+            add
+          </button>
+        </form>
       </div>
     </div>
   )
