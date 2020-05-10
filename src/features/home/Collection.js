@@ -35,7 +35,7 @@ const Collection = () => {
       <section>
         {collection.map(col => (
           <p tw="bg-gray-300 p-8 rounded my-2" key={col.id}>
-            {col.collectionName}
+            {col.name}
           </p>
         ))}
       </section>

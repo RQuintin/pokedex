@@ -13,7 +13,7 @@ export const collectionSlice = createSlice({
     create: (state, action) => {
       state.collectionList.push({
         id: collectionId,
-        collectionName: action.payload,
+        name: action.payload,
         pokemons: [],
       })
       collectionId++
