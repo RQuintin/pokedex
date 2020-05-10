@@ -5,12 +5,12 @@ import tw from "twin.macro"
 import React, { useState } from "react"
 
 import { useSelector, useDispatch } from "react-redux"
-import { create } from "./collectionSlice"
+import { create, selectorCollection } from "./collectionSlice"
 
 const Collection = () => {
   const [collectionName, setCollectionName] = useState("")
   const dispatch = useDispatch()
-  const collection = useSelector(state => state.collection)
+  const collection = useSelector(selectorCollection)
 
   const handleCollectionCreation = e => {
     e.preventDefault()

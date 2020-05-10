@@ -2,12 +2,16 @@ import { createSlice } from "@reduxjs/toolkit"
 
 let collectionId = 1
 
+const initialState = {
+  collectionList: [],
+}
+
 export const collectionSlice = createSlice({
   name: "collection",
-  initialState: [],
+  initialState: initialState,
   reducers: {
     create: (state, action) => {
-      state.push({
+      state.collectionList.push({
         id: collectionId,
         collectionName: action.payload,
       })
@@ -16,5 +20,6 @@ export const collectionSlice = createSlice({
   },
 })
 
+export const selectorCollection = state => state.collection.collectionList
 export const { create } = collectionSlice.actions
 export default collectionSlice.reducer

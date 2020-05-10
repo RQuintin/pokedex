@@ -12,7 +12,6 @@ export const pokemonCardsSlice = createSlice({
   initialState: initialState,
   reducers: {
     getData: (state, action) => {
-      // const { name, baseExperience, height, weight, type } = action.payload
       state.pokemonList.push(action.payload)
     },
   },
