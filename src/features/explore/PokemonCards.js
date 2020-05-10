@@ -21,11 +21,18 @@ const PokemonCards = () => {
       Pokemon Cards
       <section tw="grid grid-cols-1 gap-2">
         <ul>
-          {/* {pokemonList.map(poke => (
+          {pokemonList.map(poke => (
             <li key={poke.name}>
-              <PokemonCard pokemonName={poke.name} />
+              <PokemonCard
+                pokemonName={poke.name}
+                pokemonType={poke.type}
+                pokemonHeight={poke.height}
+                pokemonWeight={poke.weight}
+                pokemonBaseExperience={poke.baseExperience}
+                pokemonSprite={poke.sprites}
+              />
             </li>
-          ))} */}
+          ))}
         </ul>
       </section>
     </div>
