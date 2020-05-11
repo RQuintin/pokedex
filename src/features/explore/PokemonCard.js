@@ -2,11 +2,20 @@
 import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"
 
+import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { selectorCollection } from "../home/collectionSlice"
+import { add, selectorCollection } from "../home/collectionSlice"
 
 const PokemonCard = props => {
   const collection = useSelector(selectorCollection)
+  const dispatch = useDispatch()
+
+  const [collectionInput, setCollectionInput] = useState("")
+
+  const addPokemonToList = e => {
+    e.preventDefault()
+    console.log(collectionInput)
+  }
 
   const {
     pokemonName,
@@ -20,7 +29,7 @@ const PokemonCard = props => {
   return (
     <div tw="flex flex-row justify-around items-center bg-red-500 p-2 my-2 rounded">
       <div tw="">
-        <img tw="bg-cover" alt={pokemonName} src={pokemonSprite} />
+        <img tw="bg-cover bg-center" alt={pokemonName} src={pokemonSprite} />
       </div>
       <div tw="mx-1">
         <p>{pokemonName}</p>
@@ -30,15 +39,20 @@ const PokemonCard = props => {
         <p>{pokemonBaseExperience}</p>
       </div>
       <div tw="mx-1">
-        <form>
-          <label>
+        <form onSubmit={addPokemonToList}>
+          {/* <label>
             Add Pokemon to collection <br />
-            <select>
+            <select
+              value={collectionInput}
+              onChange={e => setCollectionInput(e.target.value)}
+            >
               {collection.map(col => (
-                <option value={col.name}>{col.name}</option>
+                <option key={collection.name} value={col.name}>
+                  {col.name}
+                </option>
               ))}
             </select>
-          </label>
+          </label> */}
           <button type="submit" tw="bg-gray-300 p-1 rounded">
             add
           </button>

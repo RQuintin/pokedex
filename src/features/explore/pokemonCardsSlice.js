@@ -28,7 +28,10 @@ export const fetchPokemonNameUrl = () => {
       data.map(async poke => {
         const responseDetails = await axios.get(poke.url)
 
+        console.log(responseDetails)
+
         let tempDetails = {
+          id: responseDetails.data.id,
           name: responseDetails.data.species.name,
           baseExperience: responseDetails.data.base_experience,
           height: responseDetails.data.height,
