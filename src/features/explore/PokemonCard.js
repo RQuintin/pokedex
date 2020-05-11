@@ -18,6 +18,7 @@ const PokemonCard = props => {
   }
 
   const {
+    pokemonId,
     pokemonName,
     pokemonType,
     pokemonHeight,
@@ -40,19 +41,19 @@ const PokemonCard = props => {
       </div>
       <div tw="mx-1">
         <form onSubmit={addPokemonToList}>
-          {/* <label>
+          <label>
             Add Pokemon to collection <br />
             <select
               value={collectionInput}
               onChange={e => setCollectionInput(e.target.value)}
             >
               {collection.map(col => (
-                <option key={collection.name} value={col.name}>
+                <option key={`${pokemonId}-${col.name}`} value={col.name}>
                   {col.name}
                 </option>
               ))}
             </select>
-          </label> */}
+          </label>
           <button type="submit" tw="bg-gray-300 p-1 rounded">
             add
           </button>

@@ -7,12 +7,19 @@ const initialState = {
   pokemonList: [],
 }
 
+const pokemonExists = (arr, val) => {
+  return arr.some(arrVal => val === arrVal)
+}
+
 export const pokemonCardsSlice = createSlice({
   name: "pokemonCards",
   initialState: initialState,
   reducers: {
     getData: (state, action) => {
-      state.pokemonList.push(action.payload)
+      const existingPokeIds = state.pokemonList.map(poke => poke.id)
+      if (!pokemonExists(existingPokeIds, action.payload.id)) {
+        state.pokemonList.push(action.payload)
+      }
     },
   },
 })
@@ -27,8 +34,6 @@ export const fetchPokemonNameUrl = () => {
 
       data.map(async poke => {
         const responseDetails = await axios.get(poke.url)
-
-        console.log(responseDetails)
 
         let tempDetails = {
           id: responseDetails.data.id,
