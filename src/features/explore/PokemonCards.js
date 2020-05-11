@@ -6,15 +6,21 @@ import PokemonCard from "./PokemonCard"
 import { useEffect } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { fetchPokemonNameUrl, selectorPokemon } from "./pokemonCardsSlice"
+import {
+  fetchPokemonNameUrl,
+  NUMBER_OF_POKEMON,
+  selectorPokemon,
+} from "./pokemonCardsSlice"
 
 const PokemonCards = () => {
   const dispatch = useDispatch()
   const pokemonList = useSelector(selectorPokemon)
 
   useEffect(() => {
-    dispatch(fetchPokemonNameUrl())
-  }, [dispatch])
+    if (pokemonList.length !== NUMBER_OF_POKEMON) {
+      return dispatch(fetchPokemonNameUrl())
+    }
+  }, [dispatch, pokemonList])
 
   return (
     <div tw="p-2">
