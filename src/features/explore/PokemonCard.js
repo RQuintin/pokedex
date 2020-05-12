@@ -10,11 +10,28 @@ const PokemonCard = props => {
   const collection = useSelector(selectorCollection)
   const dispatch = useDispatch()
 
-  const [collectionInput, setCollectionInput] = useState("")
+  const [pokemonCollectionInput, setPokemonCollectionInput] = useState({
+    id: "",
+    pokemon: "",
+  })
 
-  const addPokemonToList = e => {
+  const handlePokemonToCollection = e => {
+    console.log(e.target.value)
+    setPokemonCollectionInput({
+      ...pokemonCollectionInput,
+      id: e.target.value,
+      pokemon: pokemonId,
+    })
+  }
+
+  const addPokemonToCollection = e => {
     e.preventDefault()
-    console.log(collectionInput)
+    console.log("addPokemonToCollection: ", pokemonCollectionInput)
+    setPokemonCollectionInput({
+      ...pokemonCollectionInput,
+      id: "",
+      pokemon: "",
+    })
   }
 
   const {
@@ -40,21 +57,22 @@ const PokemonCard = props => {
         <p>{pokemonBaseExperience}</p>
       </div>
       <div tw="mx-1">
-        <form onSubmit={addPokemonToList}>
+        <form onSubmit={addPokemonToCollection}>
           <label>
-            Add Pokemon to collection <br />
+            Select Collection <br />
             <select
-              value={collectionInput}
-              onChange={e => setCollectionInput(e.target.value)}
+              value={pokemonCollectionInput.id}
+              onChange={handlePokemonToCollection}
             >
-              {collection.map(col => (
-                <option key={`${pokemonId}-${col.name}`} value={col.name}>
-                  {col.name}
+              <option value={-1}>Select pokemon</option>
+              {collection.map(clctn => (
+                <option key={`${clctn.id}-${pokemonId}`} value={clctn.id}>
+                  {clctn.name}
                 </option>
               ))}
             </select>
           </label>
-          <button type="submit" tw="bg-gray-300 p-1 rounded">
+          <button type="submit" tw="rounded bg-gray-300 p-1 m-1">
             add
           </button>
         </form>
