@@ -8,16 +8,16 @@ import { Link } from "react-router-dom"
 const Navbar = () => {
   return (
     <div>
-      <nav tw="text-center bg-yellow-500">
+      <nav tw="flex flex-row p-2 justify-between text-white bg-purple-700 sm:text-lg ">
         <h3> POKEDEX</h3>
-        <ul>
-          <li>
+        <ul tw="flex flex-row">
+          <li tw="mx-1">
             <Link to="/"> landing </Link>
           </li>
-          <li>
+          <li tw="mx-1">
             <Link to="/home"> home </Link>
           </li>
-          <li>
+          <li tw="mx-1">
             <Link to="/explore"> explore </Link>
           </li>
         </ul>
