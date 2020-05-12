@@ -16,17 +16,15 @@ const PokemonCard = props => {
   })
 
   const handlePokemonToCollection = e => {
-    console.log(e.target.value)
     setPokemonCollectionInput({
       ...pokemonCollectionInput,
       id: Number(e.target.value),
-      pokemon: pokemonId,
+      pokemon: pokemonName,
     })
   }
 
   const addPokemonToCollection = e => {
     e.preventDefault()
-    // console.log("addPokemonToCollection: ", pokemonCollectionInput)
     setPokemonCollectionInput({
       ...pokemonCollectionInput,
       id: "",
