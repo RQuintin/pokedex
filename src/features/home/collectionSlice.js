@@ -13,14 +13,27 @@ export const collectionSlice = createSlice({
     create: (state, action) => {
       state.collectionList.push({
         id: collectionId,
-        collectionName: action.payload,
+        name: action.payload,
         pokemons: [],
       })
       collectionId++
+    },
+    add: (state, action) => {
+      console.log(action.payload)
+      const collectionListIndex = state.collectionList.findIndex(
+        x => x.id === action.payload.id
+      )
+
+      console.log(collectionListIndex)
+      if (collectionListIndex !== -1) {
+        state.collectionList[collectionListIndex].pokemons.push(
+          action.payload.pokemon
+        )
+      }
     },
   },
 })
 
 export const selectorCollection = state => state.collection.collectionList
-export const { create } = collectionSlice.actions
+export const { create, add } = collectionSlice.actions
 export default collectionSlice.reducer

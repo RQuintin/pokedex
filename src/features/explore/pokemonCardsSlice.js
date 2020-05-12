@@ -1,23 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
 
-const URL = "https://pokeapi.co/api/v2/pokemon?limit=10"
+export const NUMBER_OF_POKEMON = 10
+
+const URL = `https://pokeapi.co/api/v2/pokemon?limit=${NUMBER_OF_POKEMON}`
 
 const initialState = {
   pokemonList: [],
+}
+
+const pokemonExists = (arr, val) => {
+  return arr.some(arrVal => val === arrVal)
 }
 
 export const pokemonCardsSlice = createSlice({
   name: "pokemonCards",
   initialState: initialState,
   reducers: {
-    getData: (state, action) => {
-      state.pokemonList.push(action.payload)
+    add: (state, action) => {
+      const existingPokeIds = state.pokemonList.map(poke => poke.id)
+      if (!pokemonExists(existingPokeIds, action.payload.id)) {
+        state.pokemonList.push(action.payload)
+      }
     },
   },
 })
 
-export const { getData } = pokemonCardsSlice.actions
+export const { add } = pokemonCardsSlice.actions
 
 export const fetchPokemonNameUrl = () => {
   return async dispatch => {
@@ -29,6 +38,7 @@ export const fetchPokemonNameUrl = () => {
         const responseDetails = await axios.get(poke.url)
 
         let tempDetails = {
+          id: responseDetails.data.id,
           name: responseDetails.data.species.name,
           baseExperience: responseDetails.data.base_experience,
           height: responseDetails.data.height,
@@ -37,7 +47,7 @@ export const fetchPokemonNameUrl = () => {
           sprites: responseDetails.data.sprites.front_default,
         }
 
-        dispatch(getData(tempDetails))
+        dispatch(add(tempDetails))
       })
     } catch (e) {
       console.log("Could not fetch data.")

@@ -22,16 +22,16 @@ const PokemonCards = () => {
       <section tw="grid grid-cols-1 gap-2">
         <ul>
           {pokemonList.map(poke => (
-            <li key={poke.name}>
-              <PokemonCard
-                pokemonName={poke.name}
-                pokemonType={poke.type}
-                pokemonHeight={poke.height}
-                pokemonWeight={poke.weight}
-                pokemonBaseExperience={poke.baseExperience}
-                pokemonSprite={poke.sprites}
-              />
-            </li>
+            <PokemonCard
+              key={`key-${poke.id}`}
+              pokemonId={poke.id}
+              pokemonName={poke.name}
+              pokemonType={poke.type}
+              pokemonHeight={poke.height}
+              pokemonWeight={poke.weight}
+              pokemonBaseExperience={poke.baseExperience}
+              pokemonSprite={poke.sprites}
+            />
           ))}
         </ul>
       </section>

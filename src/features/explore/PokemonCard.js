@@ -2,8 +2,39 @@
 import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"
 
+import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { add, selectorCollection } from "../home/collectionSlice"
+
 const PokemonCard = props => {
+  const collection = useSelector(selectorCollection)
+  const dispatch = useDispatch()
+
+  const [pokemonCollectionInput, setPokemonCollectionInput] = useState({
+    id: "",
+    pokemon: "",
+  })
+
+  const handlePokemonToCollection = e => {
+    setPokemonCollectionInput({
+      ...pokemonCollectionInput,
+      id: Number(e.target.value),
+      pokemon: pokemonName,
+    })
+  }
+
+  const addPokemonToCollection = e => {
+    e.preventDefault()
+    setPokemonCollectionInput({
+      ...pokemonCollectionInput,
+      id: "",
+      pokemon: "",
+    })
+    dispatch(add(pokemonCollectionInput))
+  }
+
   const {
+    pokemonId,
     pokemonName,
     pokemonType,
     pokemonHeight,
@@ -15,7 +46,7 @@ const PokemonCard = props => {
   return (
     <div tw="flex flex-row justify-around items-center bg-red-500 p-2 my-2 rounded">
       <div tw="">
-        <img tw="bg-cover" alt={pokemonName} src={pokemonSprite} />
+        <img tw="bg-cover bg-center" alt={pokemonName} src={pokemonSprite} />
       </div>
       <div tw="mx-1">
         <p>{pokemonName}</p>
@@ -25,17 +56,25 @@ const PokemonCard = props => {
         <p>{pokemonBaseExperience}</p>
       </div>
       <div tw="mx-1">
-        <form>
+        <form onSubmit={addPokemonToCollection}>
           <label>
-            Add Pokemon to collection <br />
-            <select>
-              <option value="grapefruit">Grapefruit</option>
-              <option value="lime">Lime</option>
-              <option value="coconut">Coconut</option>
-              <option value="mango">Mango</option>
+            Select Collection <br />
+            <select
+              value={pokemonCollectionInput.id}
+              onChange={handlePokemonToCollection}
+            >
+              <option value={-1}>Select pokemon</option>
+              {collection.map(clctn => (
+                <option
+                  key={`${clctn.id}-${pokemonId}`}
+                  value={Number(clctn.id)}
+                >
+                  {clctn.name}
+                </option>
+              ))}
             </select>
           </label>
-          <button type="submit" tw="bg-gray-300 p-1 rounded">
+          <button type="submit" tw="rounded bg-gray-300 p-1 m-1">
             add
           </button>
         </form>
