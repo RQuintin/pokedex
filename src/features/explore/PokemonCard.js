@@ -19,19 +19,20 @@ const PokemonCard = props => {
     console.log(e.target.value)
     setPokemonCollectionInput({
       ...pokemonCollectionInput,
-      id: e.target.value,
+      id: Number(e.target.value),
       pokemon: pokemonId,
     })
   }
 
   const addPokemonToCollection = e => {
     e.preventDefault()
-    console.log("addPokemonToCollection: ", pokemonCollectionInput)
+    // console.log("addPokemonToCollection: ", pokemonCollectionInput)
     setPokemonCollectionInput({
       ...pokemonCollectionInput,
       id: "",
       pokemon: "",
     })
+    dispatch(add(pokemonCollectionInput))
   }
 
   const {
@@ -66,7 +67,10 @@ const PokemonCard = props => {
             >
               <option value={-1}>Select pokemon</option>
               {collection.map(clctn => (
-                <option key={`${clctn.id}-${pokemonId}`} value={clctn.id}>
+                <option
+                  key={`${clctn.id}-${pokemonId}`}
+                  value={Number(clctn.id)}
+                >
                   {clctn.name}
                 </option>
               ))}
