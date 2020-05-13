@@ -9,7 +9,7 @@ const CollectionCard = props => {
   return (
     <section tw="flex flex-row bg-blue-800 h-full shadow-lg text-white rounded p-8 my-2">
       <div tw="w-1/3 mx-1 my-auto text-xl md:text-lg">
-        <h3 tw="bg-gray-800 rounded px-1 py-4 md:p-2 text-center font-bold text-lg sm:text-xl md:text-lg">
+        <h3 tw="bg-purple-600 rounded px-1 py-4 md:p-2 text-center font-bold text-lg sm:text-xl md:text-lg">
           {collection.name}
         </h3>
       </div>
