@@ -9,7 +9,7 @@ import Collection from "./Collection"
 
 const Home = () => {
   return (
-    <div tw="flex flex-1 flex-col h-screen bg-red-500">
+    <div tw="flex flex-1 flex-col h-screen bg-blue-100">
       <UserInfo />
       <Collection />
     </div>

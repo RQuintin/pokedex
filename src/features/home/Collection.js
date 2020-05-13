@@ -4,6 +4,7 @@ import tw from "twin.macro"
 
 import React, { useState } from "react"
 
+import CollectionCard from "./components/CollectionCard"
 import { useSelector, useDispatch } from "react-redux"
 import { create, selectorCollection } from "./collectionSlice"
 
@@ -19,27 +20,26 @@ const Collection = () => {
   }
 
   return (
-    <div tw="p-2">
-      <section>
-        <h3 tw="text-lg"> Your Collection </h3>
+    <div tw="p-2 md:p-4">
+      <section tw="text-lg md:text-xl">
+        <h3> Your Collection </h3>
         <form onSubmit={handleCollectionCreation}>
           <input
+            tw="rounded"
             value={collectionName}
             onChange={e => setCollectionName(e.target.value)}
           />
-          <button tw="bg-purple-500 rounded p-1 m-1" type="submit">
-            add collection
+          <button
+            tw="bg-purple-500 hover:bg-purple-600 text-gray-200 hover:text-white rounded p-1 m-1"
+            type="submit"
+          >
+            create collection
           </button>
         </form>
       </section>
-      <section>
+      <section tw="md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-2">
         {collection.map(col => (
-          <p tw="bg-gray-300 p-8 rounded my-2" key={col.id}>
-            {col.name}
-            {col.pokemons.map(poke => (
-              <p> {poke} </p>
-            ))}
-          </p>
+          <CollectionCard key={col.id} collection={col} />
         ))}
       </section>
     </div>

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"
-import PokemonCard from "./PokemonCard"
+import PokemonCard from "./components/PokemonCard"
 
 import { useEffect } from "react"
 
@@ -17,10 +17,9 @@ const PokemonCards = () => {
   }, [dispatch])
 
   return (
-    <div tw="p-2">
-      Pokemon Cards
-      <section tw="grid grid-cols-1 gap-2">
-        <ul>
+    <div tw="p-2 md:p-4">
+      <ul>
+        <div tw="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {pokemonList.map(poke => (
             <PokemonCard
               key={`key-${poke.id}`}
@@ -33,8 +32,8 @@ const PokemonCards = () => {
               pokemonSprite={poke.sprites}
             />
           ))}
-        </ul>
-      </section>
+        </div>
+      </ul>
     </div>
   )
 }
