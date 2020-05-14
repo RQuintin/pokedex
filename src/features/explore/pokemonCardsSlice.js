@@ -7,6 +7,7 @@ const URL = `https://pokeapi.co/api/v2/pokemon?limit=${NUMBER_OF_POKEMON}`
 
 const initialState = {
   pokemonList: [],
+  filteredPokemonList: [],
 }
 
 const pokemonExists = (arr, val) => {
@@ -23,10 +24,20 @@ export const pokemonCardsSlice = createSlice({
         state.pokemonList.push(action.payload)
       }
     },
+    search: (state, action) => {
+      const searchTerm = action.payload.searchTerm
+      if (searchTerm === "") {
+        state.filteredPokemonList = state.pokemonList
+      }
+      const filteredList = state.pokemonList.filter(poke =>
+        poke.name.includes(searchTerm)
+      )
+      state.filteredPokemonList = filteredList
+    },
   },
 })
 
-export const { add } = pokemonCardsSlice.actions
+export const { add, search } = pokemonCardsSlice.actions
 
 export const fetchPokemonNameUrl = () => {
   return async dispatch => {
@@ -56,5 +67,7 @@ export const fetchPokemonNameUrl = () => {
 }
 
 export const selectorPokemon = state => state.pokemon.pokemonList
+export const selectorFilteredPokemon = state =>
+  state.pokemon.filteredPokemonList
 
 export default pokemonCardsSlice.reducer
