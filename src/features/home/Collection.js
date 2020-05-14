@@ -25,7 +25,7 @@ const Collection = () => {
         <h3> Your Collection </h3>
         <form onSubmit={handleCollectionCreation}>
           <input
-            tw="rounded"
+            tw="rounded border border-purple-700"
             value={collectionName}
             onChange={e => setCollectionName(e.target.value)}
           />

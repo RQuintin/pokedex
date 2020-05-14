@@ -98,32 +98,46 @@ const PokemonCard = props => {
   }
 
   return (
-    <div tw="flex flex-row justify-around items-center bg-blue-800 p-2 my-2 rounded overflow-x-auto">
+    <div tw="flex flex-row justify-around items-center bg-blue-800 p-2 rounded overflow-x-auto">
       <div tw="flex flex-col flex-wrap w-1/3 m-1">
         <img
           tw="object-contain transform sm:scale-125"
           alt={pokemonName}
           src={pokemonSprite}
         />
-        <p tw="bg-gray-100 text-gray-900 font-bold text-center whitespace-normal rounded p-1 m-1">
+        <p tw="bg-gray-100 text-gray-900 font-extrabold text-center whitespace-normal rounded p-1 m-1">
           {pokemonName}
         </p>
 
         <PokeTypeColorElement
-          tw="text-center text-white text-center whitespace-normal rounded p-1 m-1"
+          tw="text-center text-white font-semibold text-center whitespace-normal rounded p-1 m-1"
           color={pokemonType}
         >
           {pokemonType}
         </PokeTypeColorElement>
-        {/* <p tw="bg-purple-500 text-center text-white text-center whitespace-normal rounded p-1 m-1">
-          {pokemonType}
-        </p> */}
       </div>
       <div tw="flex flex-col items-center w-2/3">
-        <div tw="text-white">
-          <p>height: {pokemonHeight}</p>
-          <p>weight: {pokemonWeight}</p>
-          <p>exp: {pokemonBaseExperience}</p>
+        <div>
+          <p tw="my-2">
+            <span tw="bg-gray-900 text-gray-100 p-1 mx-2 rounded">height</span>
+            <span tw="bg-gray-100 text-gray-900 p-1 rounded">
+              {pokemonHeight}
+            </span>
+          </p>
+          <p tw="my-2">
+            <span tw="bg-gray-900 text-gray-100 p-1 mx-2 rounded">weight</span>
+            <span tw="bg-gray-100 text-gray-900 p-1 rounded">
+              {pokemonWeight}
+            </span>
+          </p>
+          <p tw="my-2">
+            <span tw="bg-gray-900 text-gray-100 p-1 mx-2 rounded">
+              base-exp
+            </span>
+            <span tw="bg-gray-100 text-gray-900 p-1 rounded">
+              {pokemonBaseExperience}
+            </span>
+          </p>
         </div>
         <div tw="">
           <form onSubmit={addPokemonToCollection}>
