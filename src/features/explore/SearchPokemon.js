@@ -12,7 +12,7 @@ const SearchPokemon = () => {
         <form>
           <input tw="rounded" />
           <button
-            tw="bg-purple-500 hover:bg-purple-600 text-gray-200 hover:text-white rounded p-2 m-1"
+            tw="bg-purple-700 hover:bg-purple-800 text-gray-200 hover:text-white rounded p-2 m-1"
             type="submit"
           >
             search

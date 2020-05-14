@@ -30,7 +30,7 @@ const Collection = () => {
             onChange={e => setCollectionName(e.target.value)}
           />
           <button
-            tw="bg-purple-500 hover:bg-purple-600 text-gray-200 hover:text-white rounded p-1 m-1"
+            tw="bg-purple-700 hover:bg-purple-800 text-gray-200 hover:text-white rounded p-1 m-1"
             type="submit"
           >
             create collection
