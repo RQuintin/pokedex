@@ -139,10 +139,11 @@ const PokemonCard = props => {
             </span>
           </p>
         </div>
-        <div tw="">
+        <div tw="mt-4">
           <form onSubmit={addPokemonToCollection}>
             <label>
               <select
+                tw="rounded"
                 value={pokemonCollectionInput.id}
                 onChange={handlePokemonToCollection}
               >
@@ -157,7 +158,10 @@ const PokemonCard = props => {
                 ))}
               </select>
             </label>
-            <button type="submit" tw="rounded bg-gray-300 p-1 m-1">
+            <button
+              type="submit"
+              tw="rounded bg-gray-300 text-gray-800 hover:bg-gray-800 hover:text-gray-100 px-4 py-1 ml-2"
+            >
               add
             </button>
           </form>
