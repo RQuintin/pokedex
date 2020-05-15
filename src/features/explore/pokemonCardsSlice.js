@@ -40,26 +40,30 @@ export const pokemonCardsSlice = createSlice({
 export const { add, search } = pokemonCardsSlice.actions
 
 export const fetchPokemonNameUrl = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const state = getState()
+
     try {
-      const response = await axios.get(URL)
-      const data = response.data.results
+      if (state.pokemon.pokemonList.length !== NUMBER_OF_POKEMON) {
+        const response = await axios.get(URL)
+        const data = response.data.results
 
-      data.map(async poke => {
-        const responseDetails = await axios.get(poke.url)
+        data.map(async poke => {
+          const responseDetails = await axios.get(poke.url)
 
-        let tempDetails = {
-          id: responseDetails.data.id,
-          name: responseDetails.data.species.name,
-          baseExperience: responseDetails.data.base_experience,
-          height: responseDetails.data.height,
-          weight: responseDetails.data.weight,
-          type: responseDetails.data.types[0].type.name,
-          sprites: responseDetails.data.sprites.front_default,
-        }
+          let tempDetails = {
+            id: responseDetails.data.id,
+            name: responseDetails.data.species.name,
+            baseExperience: responseDetails.data.base_experience,
+            height: responseDetails.data.height,
+            weight: responseDetails.data.weight,
+            type: responseDetails.data.types[0].type.name,
+            sprites: responseDetails.data.sprites.front_default,
+          }
 
-        dispatch(add(tempDetails))
-      })
+          dispatch(add(tempDetails))
+        })
+      }
     } catch (e) {
       console.log("Could not fetch data.")
     }
