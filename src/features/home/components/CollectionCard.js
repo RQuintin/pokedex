@@ -3,23 +3,37 @@ import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"
 import React from "react"
 
+import { useDispatch, useSelector } from "react-redux"
+import { remove, selectorCollection } from "../collectionSlice"
+
 const CollectionCard = props => {
-  const { collection } = props
+  const { collectionObj } = props
+  const dispatch = useDispatch()
+  // const collectionState = useSelector(selectorCollection)
+
+  const handleRemoveCollection = collectionId => {
+    dispatch(remove({ id: collectionId }))
+  }
 
   return (
     <section tw="flex flex-col bg-blue-800 h-full shadow-lg text-white rounded overflow-auto m-1">
       <div tw="flex flex-row justify-end py-1 px-2">
-        <p tw="mx-1">edit</p>
-        <p tw="mx-2">delete</p>
+        <button tw="mx-1 p-1 rounded">edit</button>
+        <button
+          onClick={() => handleRemoveCollection(collectionObj.id)}
+          tw="mx-1 p-1 rounded"
+        >
+          delete
+        </button>
       </div>
-      <div tw=" flex flex-row justify-around pt-8 pb-8 px-2">
+      <div tw="flex flex-row justify-around pt-4 pb-8 px-2">
         <div tw="my-auto text-xl md:text-lg">
           <h3 tw="bg-purple-600 whitespace-pre-line rounded px-1 py-4 md:p-2 text-center font-bold text-lg sm:text-xl md:text-lg">
-            {collection.name}
+            {collectionObj.name}
           </h3>
         </div>
         <div tw="w-2/3 my-auto text-center sm:text-lg md:text-base">
-          {collection.pokemons.map(poke => (
+          {collectionObj.pokemons.map(poke => (
             <p
               key={poke}
               tw="text-gray-900 font-semibold bg-gray-100 p-1 rounded m-1"
