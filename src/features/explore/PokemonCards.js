@@ -25,7 +25,9 @@ const PokemonCards = () => {
     <div tw="p-2 md:p-4">
       <ul>
         <div tw="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-3 lg:gap-4">
-          {filteredPokemonList.length === 0
+          {filteredPokemonList[0] === "xxx"
+            ? "No Pokemon found."
+            : filteredPokemonList.length === 0
             ? pokemonList.map(poke => (
                 <PokemonCard
                   key={`key-${poke.id}`}

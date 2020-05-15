@@ -26,13 +26,20 @@ export const pokemonCardsSlice = createSlice({
     },
     search: (state, action) => {
       const searchTerm = action.payload.searchTerm
+
       if (searchTerm === "") {
         state.filteredPokemonList = state.pokemonList
       }
+
       const filteredList = state.pokemonList.filter(poke =>
         poke.name.includes(searchTerm)
       )
-      state.filteredPokemonList = filteredList
+
+      if (searchTerm !== "" && filteredList.length === 0) {
+        state.filteredPokemonList = ["xxx"]
+      } else {
+        state.filteredPokemonList = filteredList
+      }
     },
   },
 })
