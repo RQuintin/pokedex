@@ -27,12 +27,6 @@ const SearchPokemon = () => {
             value={searchTerm}
             onChange={handleSearchTermChange}
           />
-          {/* <button
-            tw="bg-purple-700 hover:bg-purple-800 text-gray-200 hover:text-white rounded p-2 m-1"
-            type="submit"
-          >
-            search
-          </button> */}
         </form>
       </section>
     </div>

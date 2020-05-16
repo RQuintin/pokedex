@@ -32,7 +32,7 @@ export const pokemonCardsSlice = createSlice({
       }
 
       const filteredList = state.pokemonList.filter(poke =>
-        poke.name.includes(searchTerm)
+        poke.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
 
       if (searchTerm !== "" && filteredList.length === 0) {
