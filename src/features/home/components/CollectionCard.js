@@ -4,29 +4,50 @@ import tw from "twin.macro"
 import React, { useState } from "react"
 
 import { useDispatch } from "react-redux"
-import { remove } from "../collectionSlice"
+import { remove, edit } from "../collectionSlice"
 
 const CollectionCard = props => {
   const { collectionObj } = props
   const dispatch = useDispatch()
-  const [collectionName, setCollectionName] = useState(collectionObj.name)
+  const [collectionName, setCollectionName] = useState("")
+  const [isEdit, setIsEdit] = useState("no")
 
   const handleRemoveCollection = collectionId => {
     dispatch(remove({ id: collectionId }))
+  }
+
+  const handleEditToggle = () => {
+    if (isEdit === "no") {
+      setIsEdit("yes")
+      setCollectionName(collectionObj.name)
+    } else {
+      setIsEdit("no")
+      setCollectionName(collectionObj.name)
+    }
+  }
+
+  const handleSave = collectionId => {
+    dispatch(
+      edit({
+        id: collectionId,
+        editedName: collectionName,
+      })
+    )
+    setIsEdit("no")
   }
 
   const handleCollectionNameChange = e => {
     setCollectionName(e.target.value)
   }
 
-  const isEdit = "yes"
-
   return (
     <div tw="flex flex-col bg-blue-800 h-full shadow-lg text-white rounded overflow-auto m-1">
       {isEdit === "no" ? (
         <section>
           <div tw="flex flex-row justify-end py-1 px-2">
-            <button tw="mx-1 p-1 rounded">edit</button>
+            <button onClick={handleEditToggle} tw="mx-1 p-1 rounded">
+              edit
+            </button>
             <button
               onClick={() => handleRemoveCollection(collectionObj.id)}
               tw="mx-1 p-1 rounded"
@@ -54,10 +75,17 @@ const CollectionCard = props => {
         </section>
       ) : (
         <div>
-          <form>
+          <section>
             <div tw="flex flex-row justify-between py-1 px-2">
-              <button tw="mx-1 p-1 rounded">cancel</button>
-              <button tw="mx-1 p-1 rounded">save</button>
+              <button onClick={handleEditToggle} tw="mx-1 p-1 rounded">
+                cancel
+              </button>
+              <button
+                onClick={() => handleSave(collectionObj.id)}
+                tw="mx-1 p-1 rounded"
+              >
+                save
+              </button>
             </div>
             <div tw="flex flex-row justify-around pt-4 pb-8 px-2">
               <div tw="my-auto text-xl md:text-lg">
@@ -78,7 +106,7 @@ const CollectionCard = props => {
                 ))}
               </div>
             </div>
-          </form>
+          </section>
         </div>
       )}
     </div>

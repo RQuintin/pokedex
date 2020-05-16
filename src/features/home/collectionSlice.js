@@ -32,17 +32,29 @@ export const collectionSlice = createSlice({
     remove: (state, action) => {
       const collectionIdToRemove = action.payload.id
 
-      const CollectionIdRemoveIndex = state.collectionList.findIndex(
+      const collectionIdRemoveIndex = state.collectionList.findIndex(
         col => col.id === collectionIdToRemove
       )
 
-      if (CollectionIdRemoveIndex !== -1) {
-        state.collectionList.splice(CollectionIdRemoveIndex, 1)
+      if (collectionIdRemoveIndex !== -1) {
+        state.collectionList.splice(collectionIdRemoveIndex, 1)
+      }
+    },
+    edit: (state, action) => {
+      const collectionIdToEdit = action.payload.id
+      const editedName = action.payload.editedName
+
+      const collectionIdEditIndex = state.collectionList.findIndex(
+        col => col.id === collectionIdToEdit
+      )
+
+      if (collectionIdEditIndex !== -1) {
+        state.collectionList[collectionIdEditIndex].name = editedName
       }
     },
   },
 })
 
 export const selectorCollection = state => state.collection.collectionList
-export const { create, add, remove } = collectionSlice.actions
+export const { create, add, remove, edit } = collectionSlice.actions
 export default collectionSlice.reducer
