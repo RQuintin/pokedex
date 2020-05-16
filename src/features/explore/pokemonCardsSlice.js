@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
 
-export const NUMBER_OF_POKEMON = 5
+export const NUMBER_OF_POKEMON = 25
 
 const URL = `https://pokeapi.co/api/v2/pokemon?limit=${NUMBER_OF_POKEMON}`
 
