@@ -37,7 +37,7 @@ const Collection = () => {
           </button>
         </form>
       </section>
-      <section tw="md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-2">
+      <section tw="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-2">
         {collection.map(col => (
           <CollectionCard key={col.id} collectionObj={col} />
         ))}
