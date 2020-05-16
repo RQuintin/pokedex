@@ -11,6 +11,7 @@ const CollectionCard = props => {
   const dispatch = useDispatch()
   const [collectionName, setCollectionName] = useState("")
   const [isEdit, setIsEdit] = useState("no")
+  const [pokemonList, setPokemonList] = useState(collectionObj.pokemons)
 
   const handleRemoveCollection = collectionId => {
     dispatch(remove({ id: collectionId }))
@@ -23,6 +24,7 @@ const CollectionCard = props => {
     } else {
       setIsEdit("no")
       setCollectionName(collectionObj.name)
+      setPokemonList(collectionObj.pokemons)
     }
   }
 
@@ -31,9 +33,18 @@ const CollectionCard = props => {
       edit({
         id: collectionId,
         editedName: collectionName,
+        editedPokemonList: pokemonList,
       })
     )
     setIsEdit("no")
+  }
+
+  const handleRemovePokemon = pokeName => {
+    const newPokemonList = pokemonList.filter(poke => poke !== pokeName)
+    setPokemonList(newPokemonList)
+    console.log(pokeName)
+    console.log(pokemonList)
+    console.log(newPokemonList)
   }
 
   const handleCollectionNameChange = e => {
@@ -62,14 +73,16 @@ const CollectionCard = props => {
               </h3>
             </div>
             <div tw="w-2/3 my-auto text-center sm:text-lg md:text-base">
-              {collectionObj.pokemons.map(poke => (
-                <p
-                  key={poke}
-                  tw="text-gray-900 font-semibold bg-gray-100 p-1 rounded m-1"
-                >
-                  {poke}
-                </p>
-              ))}
+              <ul>
+                {collectionObj.pokemons.map(poke => (
+                  <li
+                    key={poke}
+                    tw="text-gray-900 font-semibold bg-gray-100 p-1 rounded m-1"
+                  >
+                    {poke}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
@@ -96,14 +109,22 @@ const CollectionCard = props => {
                 />
               </div>
               <div tw="w-2/3 my-auto text-center sm:text-lg md:text-base">
-                {collectionObj.pokemons.map(poke => (
-                  <p
-                    key={poke}
-                    tw="text-gray-900 font-semibold bg-gray-100 p-1 rounded m-1"
-                  >
-                    {poke}
-                  </p>
-                ))}
+                <ul>
+                  {pokemonList.map(poke => (
+                    <li
+                      key={poke}
+                      tw="flex flex-row justify-between items-center text-gray-900 mx-4 font-semibold bg-gray-100 p-1 my-1 rounded"
+                    >
+                      <p>{poke}</p>
+                      <button
+                        onClick={() => handleRemovePokemon(poke)}
+                        tw="font-semibold bg-red-700 p-1 rounded text-gray-100"
+                      >
+                        x
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </section>

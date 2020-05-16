@@ -43,6 +43,7 @@ export const collectionSlice = createSlice({
     edit: (state, action) => {
       const collectionIdToEdit = action.payload.id
       const editedName = action.payload.editedName
+      const editedPokemonList = action.payload.editedPokemonList
 
       const collectionIdEditIndex = state.collectionList.findIndex(
         col => col.id === collectionIdToEdit
@@ -50,6 +51,7 @@ export const collectionSlice = createSlice({
 
       if (collectionIdEditIndex !== -1) {
         state.collectionList[collectionIdEditIndex].name = editedName
+        state.collectionList[collectionIdEditIndex].pokemons = editedPokemonList
       }
     },
   },
