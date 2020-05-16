@@ -24,9 +24,17 @@ export const collectionSlice = createSlice({
       )
 
       if (collectionListIndex !== -1) {
-        state.collectionList[collectionListIndex].pokemons.push(
-          action.payload.pokemon
-        )
+        if (
+          state.collectionList[collectionListIndex].pokemons.includes(
+            action.payload.pokemon
+          )
+        ) {
+          alert(`${action.payload.pokemon} already exists in collection.`)
+        } else {
+          state.collectionList[collectionListIndex].pokemons.push(
+            action.payload.pokemon
+          )
+        }
       }
     },
     remove: (state, action) => {
