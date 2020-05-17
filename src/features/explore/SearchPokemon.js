@@ -12,6 +12,7 @@ const SearchPokemon = () => {
 
   const [searchTerm, setSearchTerm] = useState("")
 
+  // dispatch search action.
   const handleSearchTermChange = e => {
     setSearchTerm(e.target.value)
     dispatch(search({ searchTerm: e.target.value }))

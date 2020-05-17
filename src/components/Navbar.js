@@ -1,3 +1,5 @@
+// This is the Navbar component. It is present on all webpages.
+
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"

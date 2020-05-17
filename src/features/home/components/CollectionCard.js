@@ -7,16 +7,23 @@ import { useDispatch } from "react-redux"
 import { remove, edit } from "../collectionSlice"
 
 const CollectionCard = props => {
+  // Get the collectionObj using props for displaying pokemon in
+  // collection cards.
   const { collectionObj } = props
   const dispatch = useDispatch()
-  const [collectionName, setCollectionName] = useState("")
+  // Initialise state for renaming collection.
+  const [collectionName, setCollectionName] = useState(collectionObj.name)
+  // Edit state is initialised with a "no"
   const [isEdit, setIsEdit] = useState("no")
+  // Initialise state for removing pokemon from a collection.
   const [pokemonList, setPokemonList] = useState(collectionObj.pokemons)
 
+  // Remove collection from the store.
   const handleRemoveCollection = collectionId => {
     dispatch(remove({ id: collectionId }))
   }
 
+  // Toggle edit functionality of a card.
   const handleEditToggle = () => {
     if (isEdit === "no") {
       setIsEdit("yes")
@@ -28,6 +35,19 @@ const CollectionCard = props => {
     }
   }
 
+  // Remove pokemon from a collection.
+  const handleRemovePokemon = pokeName => {
+    const newPokemonList = pokemonList.filter(poke => poke !== pokeName)
+    setPokemonList(newPokemonList)
+  }
+
+  // Rename collection.
+  const handleCollectionNameChange = e => {
+    setCollectionName(e.target.value)
+  }
+
+  // Save the changes made to a card.
+  // This involves renaming a collection and editing the pokemon list.
   const handleSave = collectionId => {
     dispatch(
       edit({
@@ -39,21 +59,11 @@ const CollectionCard = props => {
     setIsEdit("no")
   }
 
-  const handleRemovePokemon = pokeName => {
-    const newPokemonList = pokemonList.filter(poke => poke !== pokeName)
-    setPokemonList(newPokemonList)
-    console.log(pokeName)
-    console.log(pokemonList)
-    console.log(newPokemonList)
-  }
-
-  const handleCollectionNameChange = e => {
-    setCollectionName(e.target.value)
-  }
-
   return (
     <div tw="flex flex-col bg-blue-800 h-full shadow-lg text-white rounded overflow-auto m-1">
+      {/* conditional render based on edit button. */}
       {isEdit === "no" ? (
+        // if edit mode is off, then display the the collections as is.
         <section>
           <div tw="flex flex-row justify-end py-1 px-2">
             <button onClick={handleEditToggle} tw="mx-1 p-1 rounded">
@@ -87,6 +97,9 @@ const CollectionCard = props => {
           </div>
         </section>
       ) : (
+        // if edit mode is on, display an <input /> element in the place of collection name and
+        // display "x" buttons to delete pokemon from the collection.
+        // Also display a "cancel" and "save" button.
         <div>
           <section>
             <div tw="flex flex-row justify-between py-1 px-2">

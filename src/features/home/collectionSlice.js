@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+// intialize a counter for collection id.
 let collectionId = 1
 
 const initialState = {
@@ -10,6 +11,7 @@ export const collectionSlice = createSlice({
   name: "collection",
   initialState: initialState,
   reducers: {
+    // create a collection
     create: (state, action) => {
       state.collectionList.push({
         id: collectionId,
@@ -18,13 +20,18 @@ export const collectionSlice = createSlice({
       })
       collectionId++
     },
+    // add pokemon to a collection
     add: (state, action) => {
+      // get the index of the selected collection in the collectionList array using the collection ID.
       const collectionListIndex = state.collectionList.findIndex(
         x => x.id === action.payload.id
       )
 
+      // If collection exists, then push the pokemon in it.
       if (collectionListIndex !== -1) {
         if (
+          // If a pokemon with the same name already exists, do not put into the list.
+          // Instead, alert the user.
           state.collectionList[collectionListIndex].pokemons.includes(
             action.payload.pokemon
           )
@@ -37,6 +44,7 @@ export const collectionSlice = createSlice({
         }
       }
     },
+    // remove a collection.
     remove: (state, action) => {
       const collectionIdToRemove = action.payload.id
 
@@ -48,6 +56,7 @@ export const collectionSlice = createSlice({
         state.collectionList.splice(collectionIdRemoveIndex, 1)
       }
     },
+    // Edit collection name and pokemon in it.
     edit: (state, action) => {
       const collectionIdToEdit = action.payload.id
       const editedName = action.payload.editedName

@@ -3,14 +3,20 @@ import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"
 import styled from "@emotion/styled/macro"
 
+import PokeTypeColorElement from "./pokeTypeColor"
+import PokeFormForCollection from "./PokeFormForCollection"
+import PokeDetailsUI from "./PokeDetailsUI"
+
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { add, selectorCollection } from "../../home/collectionSlice"
 
 const PokemonCard = props => {
+  // access the collection state.
   const collection = useSelector(selectorCollection)
   const dispatch = useDispatch()
 
+  // extract details to render a pokemonCard component.
   const {
     pokemonId,
     pokemonName,
@@ -21,64 +27,14 @@ const PokemonCard = props => {
     pokemonSprite,
   } = props
 
-  // generating colours like this because twin.macro doesn't
-  // support passing colours as strings
-  const generatePokeTypeColor = color => {
-    switch (color) {
-      case "normal":
-        return tw`bg-orange-700`
-      case "fighting":
-        return tw`bg-red-800`
-      case "flying":
-        return tw`bg-purple-600`
-      case "poison":
-        return tw`bg-pink-800`
-      case "ground":
-        return tw`bg-yellow-600`
-      case "rock":
-        return tw`bg-yellow-800`
-      case "bug":
-        return tw`bg-green-600`
-      case "ghost":
-        return tw`bg-purple-900`
-      case "steel":
-        return tw`bg-gray-600`
-      case "fire":
-        return tw`bg-orange-500`
-      case "water":
-        return tw`bg-blue-500`
-      case "grass":
-        return tw`bg-green-800`
-      case "electric":
-        return tw`bg-yellow-500`
-      case "psychic":
-        return tw`bg-pink-600`
-      case "ice":
-        return tw`bg-blue-300`
-      case "dragon":
-        return tw`bg-purple-400`
-      case "dark":
-        return tw`bg-orange-900`
-      case "fairy":
-        return tw`bg-pink-300`
-      case "unknown":
-        return tw`bg-gray-500`
-      case "shadow":
-        return tw`bg-gray-700`
-      default:
-        return tw`bg-white`
-    }
-  }
-
-  const PokeTypeColorElement = styled.p`
-    ${({ color }) => generatePokeTypeColor(color)}
-  `
-
+  // create a local state here to edit a collection. We can change the name of collection
+  // and pokemon in it.
   const [pokemonCollectionInput, setPokemonCollectionInput] = useState({
     id: "",
     pokemon: "",
   })
 
+  //
   const handlePokemonToCollection = e => {
     setPokemonCollectionInput({
       ...pokemonCollectionInput,
@@ -87,6 +43,7 @@ const PokemonCard = props => {
     })
   }
 
+  // add pokemon to a collection.
   const addPokemonToCollection = e => {
     e.preventDefault()
     setPokemonCollectionInput({
@@ -118,54 +75,17 @@ const PokemonCard = props => {
       </div>
       <div tw="flex flex-col items-center w-2/3">
         <div>
-          <p tw="my-2">
-            <span tw="bg-gray-900 text-gray-100 p-1 mx-2 rounded">height</span>
-            <span tw="bg-gray-100 text-gray-900 p-1 rounded">
-              {pokemonHeight}
-            </span>
-          </p>
-          <p tw="my-2">
-            <span tw="bg-gray-900 text-gray-100 p-1 mx-2 rounded">weight</span>
-            <span tw="bg-gray-100 text-gray-900 p-1 rounded">
-              {pokemonWeight}
-            </span>
-          </p>
-          <p tw="my-2">
-            <span tw="bg-gray-900 text-gray-100 p-1 mx-2 rounded">
-              base-exp
-            </span>
-            <span tw="bg-gray-100 text-gray-900 p-1 rounded">
-              {pokemonBaseExperience}
-            </span>
-          </p>
+          <PokeDetailsUI keyAttribute="height" val={pokemonHeight} />
+          <PokeDetailsUI keyAttribute="weight" val={pokemonWeight} />
+          <PokeDetailsUI keyAttribute="base-exp" val={pokemonBaseExperience} />
         </div>
-        <div tw="mt-4">
-          <form onSubmit={addPokemonToCollection}>
-            <label>
-              <select
-                tw="rounded"
-                value={pokemonCollectionInput.id}
-                onChange={handlePokemonToCollection}
-              >
-                <option value={-1}>...</option>
-                {collection.map(clctn => (
-                  <option
-                    key={`${clctn.id}-${pokemonId}`}
-                    value={Number(clctn.id)}
-                  >
-                    {clctn.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button
-              type="submit"
-              tw="rounded bg-gray-300 text-gray-800 hover:bg-gray-800 hover:text-gray-100 px-4 py-1 ml-2"
-            >
-              add
-            </button>
-          </form>
-        </div>
+        <PokeFormForCollection
+          addPokemonToCollection={addPokemonToCollection}
+          pokemonCollectionInput={pokemonCollectionInput}
+          handlePokemonToCollection={handlePokemonToCollection}
+          collection={collection}
+          pokemonId={pokemonId}
+        />
       </div>
     </div>
   )
