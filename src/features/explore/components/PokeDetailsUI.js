@@ -6,11 +6,13 @@ import tw from "twin.macro"
 const PokeDetailsUI = props => {
   const { keyAttribute, val } = props
   return (
-    <p tw="my-2">
-      <span tw="bg-gray-900 text-gray-100 p-1 mx-2 rounded">
+    <p tw="flex flex-row justify-between my-2 p-1 bg-gray-800 rounded">
+      <span tw="font-semibold text-gray-100 p-1 mx-2 rounded">
         {keyAttribute}
       </span>
-      <span tw="bg-gray-100 text-gray-900 p-1 rounded">{val}</span>
+      <span tw="font-semibold bg-gray-200 self-stretch text-gray-900 p-1 rounded">
+        {val}
+      </span>
     </p>
   )
 }

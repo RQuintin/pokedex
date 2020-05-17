@@ -33,7 +33,7 @@ const PokeFormForCollection = props => {
         </label>
         <button
           type="submit"
-          tw="rounded bg-gray-300 text-gray-800 hover:bg-gray-800 hover:text-gray-100 px-4 py-1 ml-2"
+          tw="rounded border border-white text-gray-100 hover:bg-gray-100 hover:font-semibold hover:text-gray-900 px-4 py-1 ml-2"
         >
           add
         </button>

@@ -55,7 +55,7 @@ const PokemonCard = props => {
   }
 
   return (
-    <div tw="flex flex-row justify-around items-center bg-blue-800 p-2 rounded overflow-x-auto">
+    <div tw="flex flex-row justify-around items-center bg-blue-800 p-2 rounded-lg overflow-x-auto">
       <div tw="flex flex-col flex-wrap w-1/3 m-1">
         <img
           tw="object-contain transform sm:scale-125"

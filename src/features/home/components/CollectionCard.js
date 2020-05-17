@@ -60,25 +60,28 @@ const CollectionCard = props => {
   }
 
   return (
-    <div tw="flex flex-col bg-blue-800 h-full shadow-lg text-white rounded overflow-auto m-1">
+    <div tw="flex flex-col bg-blue-800 hover:bg-blue-900 h-full shadow-lg text-gray-100 rounded-lg overflow-auto m-1">
       {/* conditional render based on edit button. */}
       {isEdit === "no" ? (
         // if edit mode is off, then display the the collections as is.
         <section>
           <div tw="flex flex-row justify-end py-1 px-2">
-            <button onClick={handleEditToggle} tw="mx-1 p-1 rounded">
+            <button
+              onClick={handleEditToggle}
+              tw="mx-1 p-1 rounded hover:text-white hover:font-semibold hover:p-1"
+            >
               edit
             </button>
             <button
               onClick={() => handleRemoveCollection(collectionObj.id)}
-              tw="mx-1 p-1 rounded"
+              tw="mx-1 p-1 rounded hover:text-white hover:font-semibold hover:p-1"
             >
               delete
             </button>
           </div>
-          <div tw="flex flex-row justify-around pt-4 pb-8 px-2">
+          <div tw="flex flex-row justify-around pt-4 pb-12 px-2">
             <div tw="my-auto text-xl md:text-lg">
-              <h3 tw="bg-purple-600 whitespace-pre-line rounded px-1 py-4 md:p-2 text-center font-bold text-lg sm:text-xl md:text-lg">
+              <h3 tw="bg-purple-600 whitespace-pre-line rounded px-4 py-2 md:p-2 text-center font-bold text-lg sm:text-xl md:text-lg">
                 {collectionObj.name}
               </h3>
             </div>
@@ -103,12 +106,15 @@ const CollectionCard = props => {
         <div>
           <section>
             <div tw="flex flex-row justify-between py-1 px-2">
-              <button onClick={handleEditToggle} tw="mx-1 p-1 rounded">
+              <button
+                onClick={handleEditToggle}
+                tw="mx-1 p-1 rounded hover:text-white hover:font-semibold hover:p-1"
+              >
                 cancel
               </button>
               <button
                 onClick={() => handleSave(collectionObj.id)}
-                tw="mx-1 p-1 rounded"
+                tw="mx-1 p-1 rounded hover:text-white hover:font-semibold hover:p-1"
               >
                 save
               </button>
@@ -131,7 +137,7 @@ const CollectionCard = props => {
                       <p>{poke}</p>
                       <button
                         onClick={() => handleRemovePokemon(poke)}
-                        tw="font-semibold bg-red-700 p-1 rounded text-gray-100"
+                        tw="font-semibold bg-red-800 m-1 px-2 py-1 rounded-full text-gray-100"
                       >
                         x
                       </button>

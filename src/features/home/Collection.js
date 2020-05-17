@@ -21,7 +21,7 @@ const Collection = () => {
 
   return (
     <div tw="p-2 md:p-4">
-      <section tw="text-lg md:text-xl">
+      <section tw="text-base md:text-lg lg:text-xl">
         <h3 tw="mx-1"> Your Collection </h3>
         <form onSubmit={handleCollectionCreation}>
           <input

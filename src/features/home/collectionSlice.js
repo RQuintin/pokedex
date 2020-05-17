@@ -11,14 +11,28 @@ export const collectionSlice = createSlice({
   name: "collection",
   initialState: initialState,
   reducers: {
-    // create a collection
+    // create a collection only if the same name does not already exists.
     create: (state, action) => {
-      state.collectionList.push({
-        id: collectionId,
-        name: action.payload,
-        pokemons: [],
-      })
-      collectionId++
+      if (action.payload !== "") {
+        const doesCollectionNameExist = state.collectionList.find(
+          cn => cn.name === action.payload
+        )
+
+        if (!doesCollectionNameExist) {
+          state.collectionList.push({
+            id: collectionId,
+            name: action.payload,
+            pokemons: [],
+          })
+          collectionId++
+        } else {
+          alert(
+            `Collection name "${action.payload}" already exists. Please choose another name.`
+          )
+        }
+      } else {
+        alert("Collection name cannot be blank.")
+      }
     },
     // add pokemon to a collection
     add: (state, action) => {
@@ -26,6 +40,10 @@ export const collectionSlice = createSlice({
       const collectionListIndex = state.collectionList.findIndex(
         x => x.id === action.payload.id
       )
+
+      const collectionName = state.collectionList.find(
+        c => c.id === action.payload.id
+      ).name
 
       // If collection exists, then push the pokemon in it.
       if (collectionListIndex !== -1) {
@@ -36,7 +54,9 @@ export const collectionSlice = createSlice({
             action.payload.pokemon
           )
         ) {
-          alert(`${action.payload.pokemon} already exists in collection.`)
+          alert(
+            `${action.payload.pokemon} already exists in collection "${collectionName}".`
+          )
         } else {
           state.collectionList[collectionListIndex].pokemons.push(
             action.payload.pokemon
