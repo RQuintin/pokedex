@@ -12,9 +12,6 @@ import Home from "./features/home/Home"
 import Explore from "./features/explore/Explore"
 
 const App = () => {
-  useEffect(() => {
-    document.title = "Pokedex"
-  }, [])
   return (
     <Router>
       <div tw="flex flex-col bg-green-100 min-h-screen">
