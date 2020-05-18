@@ -5,7 +5,7 @@ import "tailwindcss/dist/base.css"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import React, { useEffect } from "react"
+import React from "react"
 import Navbar from "./components/Navbar"
 import Landing from "./features/landing/Landing"
 import Home from "./features/home/Home"
