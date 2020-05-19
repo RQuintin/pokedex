@@ -1,15 +1,49 @@
 /** @jsx jsx */
+/** @jsxFrag React.Fragment */
 import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"
 import "tailwindcss/dist/base.css"
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  useHistory,
+  useLocation,
+} from "react-router-dom"
 
-import React from "react"
+import React, { Fragment, Component } from "react"
+import { useSelector } from "react-redux"
+
 import Navbar from "./components/Navbar"
 import Landing from "./features/landing/Landing"
 import Home from "./features/home/Home"
 import Explore from "./features/explore/Explore"
+
+import { selectorAuth } from "./authSlice"
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const authState = useSelector(selectorAuth)
+
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authState.isUserLoggedIn ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: props.location },
+            }}
+          />
+        )
+      }
+    />
+  )
+}
 
 const App = () => {
   return (
@@ -18,8 +52,8 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route path="/home" component={Home} />
-          <Route path="/explore" component={Explore} />
+          <PrivateRoute path="/home" component={Home} />
+          <PrivateRoute path="/explore" component={Explore} />
         </Switch>
       </div>
     </Router>

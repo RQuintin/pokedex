@@ -9,9 +9,8 @@ export const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     login: (state, action) => {
-      const { loginStatus } = action.payload.loginStatus
-      console.log(loginStatus)
-      if (loginStatus) {
+      const { username, password } = action.payload
+      if (username === "test" && password === "test") {
         state.isUserLoggedIn = !state.isUserLoggedIn
       }
     },
