@@ -1,9 +1,9 @@
 {
-  "name": "pokedex",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.3.5",
+    "@reduxjs/toolkit": "^1.3.6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -11,7 +11,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
   "scripts": {
@@ -22,11 +22,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "babelMacros": {
-    "twin": {
-      "config": "src/tailwind.config.js"
-    }
   },
   "browserslist": {
     "production": [
@@ -43,6 +38,6 @@
   "devDependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "twin.macro": "^1.0.0-alpha.10"
+    "twin.macro": "^1.0.0"
   }
 }
