@@ -19,8 +19,8 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav tw="flex flex-row p-2 md:p-4 justify-between text-gray-200 bg-purple-700 sm:text-lg">
-        <Link tw="hover:text-white hover:font-semibold" to="/">
+      <nav tw="flex flex-row p-2 md:p-4 justify-between items-center text-gray-200 bg-purple-700 sm:text-lg">
+        <Link tw="hover:text-white hover:font-semibold" to="/home">
           <h3> POKEDEX</h3>
         </Link>
         {authState.isUserLoggedIn && (
@@ -38,7 +38,7 @@ const Navbar = () => {
             <li tw="mx-1 md:mx-2">
               <button
                 onClick={handleLogOut}
-                tw="p-1 rounded bg-gray-200 text-gray-900 hover:bg-gray-800 hover:text-white hover:font-semibold"
+                tw="p-1 text-sm rounded bg-gray-200 text-gray-900 hover:bg-gray-800 hover:text-white hover:font-semibold"
               >
                 logout
               </button>
