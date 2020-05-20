@@ -6,11 +6,16 @@ import tw from "twin.macro"
 
 import React from "react"
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
-import { selectorAuth } from "../authSlice"
+import { useSelector, useDispatch } from "react-redux"
+import { selectorAuth, logout } from "../authSlice"
 
 const Navbar = () => {
   const authState = useSelector(selectorAuth)
+  const dispatch = useDispatch()
+
+  const handleLogOut = e => {
+    dispatch(logout())
+  }
 
   return (
     <div>
@@ -29,6 +34,14 @@ const Navbar = () => {
               <Link tw="hover:text-white hover:font-semibold" to="/explore">
                 explore
               </Link>
+            </li>
+            <li tw="mx-1 md:mx-2">
+              <button
+                onClick={handleLogOut}
+                tw="p-1 rounded bg-gray-200 text-gray-900 hover:bg-gray-800 hover:text-white hover:font-semibold"
+              >
+                logout
+              </button>
             </li>
           </ul>
         )}
