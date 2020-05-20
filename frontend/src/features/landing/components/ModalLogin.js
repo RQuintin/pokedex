@@ -3,7 +3,7 @@ import { jsx, css } from "@emotion/core"
 import tw from "twin.macro"
 
 import React, { useState } from "react"
-
+import { useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { login } from "../../../authSlice"
 
@@ -13,6 +13,7 @@ const ModalLogin = props => {
   const [password, setPassword] = useState("")
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const attemptLogin = e => {
     e.preventDefault()
@@ -22,7 +23,7 @@ const ModalLogin = props => {
         password: password,
       })
     )
-    console.log("clickitty click")
+    history.push(props.fromState || "/home")
   }
 
   return (

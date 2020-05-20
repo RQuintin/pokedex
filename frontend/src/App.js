@@ -23,9 +23,7 @@ import Explore from "./features/explore/Explore"
 
 import { selectorAuth } from "./authSlice"
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const authState = useSelector(selectorAuth)
-
+const PrivateRoute = ({ component: Component, authState, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -46,14 +44,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 }
 
 const App = () => {
+  const authState = useSelector(selectorAuth)
   return (
     <Router>
       <div tw="flex flex-col bg-green-100 min-h-screen">
         <Navbar />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <PrivateRoute path="/home" component={Home} />
-          <PrivateRoute path="/explore" component={Explore} />
+          <PrivateRoute path="/home" component={Home} authState={authState} />
+          <PrivateRoute
+            path="/explore"
+            component={Explore}
+            authState={authState}
+          />
         </Switch>
       </div>
     </Router>
